@@ -5,7 +5,9 @@ const path = require('path')
 const fileUpload = require('express-fileupload')
 const joi = require('joi')
 const fs = require('fs')
-
+var cors = require('cors')
+ 
+app.use(cors())
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
@@ -35,7 +37,12 @@ let produkOnglen = [
     }
 ]
 
-let keranjang = []
+let keranjang = [{
+  id: 1,
+  name: "topi",
+  price: 5000,
+  total: 2,
+}]
 
 // validasi tambah product
 const validateProduct = (product) => {
@@ -209,6 +216,85 @@ app.delete('/product/:id', (req, res) => {
 })
 
 
+// route checkout
+
+// melihat semua checkout
+app.get('/checkout', (req, res) => {
+  res.status(200).json({
+    messages: "Success Get All Data keranjang",
+    data: keranjang
+  })
+})
+
+// tambah checkout
+app.post('/checkout', (req, res) => {
+  const {id, total} = req.body
+
+  const dataProduct = produkOnglen.find(barang => barang.id == id)
+
+  if(!dataProduct){
+    return res.status(404).json({
+      message: "Barang yang ingin anda beli tidak ada alias ghoib"
+    })
+  }
+
+  const indexKeranjang = keranjang.findIndex(barang => barang.id == id);
+
+  if(indexKeranjang != -1){
+    keranjang[indexKeranjang].total += total
+    return res.status(201).json({
+      message: "Total barang berhasil diubah",
+      data: keranjang
+    })
+  }
+
+  
+  keranjang.push({
+    id: dataProduct.id,
+    name: dataProduct.name,
+    price: dataProduct.price,
+    total,
+  })
+
+  return res.status(201).json({
+    message: "Barang berhasil ditambahkan ke keranjang",
+    data: keranjang
+  })
+
+})
+
+
+// delete keranjang
+app.delete('/checkout/:id', (req, res) => {
+  const {id} = req.params
+
+  const indexKeranjang = keranjang.findIndex(barang => barang.id == id);
+  keranjang.splice(indexKeranjang, 1)
+
+  return res.status(201).json({
+    message: "Barang berhasil dihapus dari keranjang",
+    data: keranjang
+  })
+}) 
+
+
+// checkout pembayaran
+app.post('/checkout/payment', (req,res) => {
+  const {bank} = req.body
+
+  const totalPrice = keranjang.reduce((barang, item) => {
+    return barang + (item.price * item.total)
+  },0)
+
+  keranjang = []
+
+  return res.status(201).json({
+    message: `Pembayaran sukses silahkan bayar ke bank ${bank}`,
+    total: totalPrice,
+    method: bank
+  })
+
+})
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
