@@ -8,7 +8,10 @@ const fs = require('fs')
 var cors = require('cors')
  
 app.use(cors())
+
+// kode ini berfungsi untuk menampilkan gambar static dari server
 app.use(express.static(path.join(__dirname, 'public')))
+
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 app.use(fileUpload())
@@ -121,6 +124,14 @@ app.post('/product', (req, res) => {
     })
   }
 
+  
+  
+  if(!req.files) {
+    return res.status(400).json({
+      messages: "Image is required"
+    })
+  }
+  
   const image = req.files.image
   const filename = `${name}.jpg`
 
@@ -135,7 +146,6 @@ app.post('/product', (req, res) => {
     image: `/images/${filename}`,
   }
 
-  console.log(newProduct)
 
   produkOnglen.push(newProduct)
 

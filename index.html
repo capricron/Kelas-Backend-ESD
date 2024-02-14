@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>List produk kami</h1>
+    <h2 id="product_populer"></h2>
+    <p></p>
+    <script>
+        fetch("http://localhost:3000/product").then(res => res.json()).then(object => {
+            object.data.forEach(product => {
+                let image = document.createElement("img")
+                let h2 = document.createElement("h2")
+                let description = document.createElement('h4')
+                let price = document.createElement('p')
+                h2.textContent = product.name
+                description.textContent = product.description
+                price.textContent = product.price
+                image.src = `http://localhost:3000${product.image}`
+
+                document.body.appendChild(image)
+                document.body.appendChild(h2)
+                document.body.appendChild(description)
+                document.body.appendChild(price)
+
+            })
+        })
+    </script>
+</body>
+</html>

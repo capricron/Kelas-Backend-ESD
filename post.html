@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Tambah Product</h1>
+
+    <form action="http://localhost:3000/product" method="post" enctype="multipart/form-data">
+        <!-- input name, price, image, description -->
+        <input type="file" name="image" placeholder="image">
+        <input type="text" name="name" placeholder="name">
+        <input type="text" name="price" placeholder="price">
+        <input type="text" name="description" placeholder="description">
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
