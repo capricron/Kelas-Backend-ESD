@@ -1,0 +1,18 @@
+<body>
+    
+    <h1>Tes</h1>
+    <h2 id="tes">Product</h2>
+    <!-- fetch data product from localhost:3000 -->
+    <script>
+        fetch('http://localhost:3000/product/3')
+        .then(response => response.json())
+        .then(data => 
+        {
+            document.getElementById('tes').innerHTML = data.data.description
+        })
+    </script>
+
+
+
+
+</body>

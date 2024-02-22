@@ -123,8 +123,6 @@ app.post('/product', (req, res) => {
       messages: error.details[0].message
     })
   }
-
-  
   
   if(!req.files) {
     return res.status(400).json({
