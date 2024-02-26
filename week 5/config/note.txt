@@ -1,0 +1,1 @@
+semua konfigurasi mulai dari database, konfigurasi thrid party, dll 
