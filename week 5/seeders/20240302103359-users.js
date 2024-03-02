@@ -13,14 +13,12 @@ module.exports = {
      * }], {});
     */
 
-    await queryInterface.bulkInsert('products', [
+    await queryInterface.bulkInsert('users', [
       {
-        "name": "Baju lebaran",
-        "description": "Baju lebaran alhamdulillah",
-        "price": 5000,
-        "image": "/images/product/baju.jpg"
-      },
-    ])
+        name: 'John Doe',
+        email: 'john@gmail.com'
+      }
+    ], {})
   },
 
   async down (queryInterface, Sequelize) {

@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-const port = 5000
+const port = 3000
 const mysql = require('mysql')
 
 var cors = require('cors')
@@ -28,11 +28,11 @@ app.get('/', (req, res) => {
   res.send('Belajar Database')
 })
 
-app.post('/product', (req, res) => {
+app.post('/products', (req, res) => {
    try{
-    const {name, price ,description, category, stock} = req.body
+    const {name, price ,description, images} = req.body
 
-    const query = `INSERT INTO product (name, price, description, category, stock) VALUES ('${name}', '${price}', "${description}", '${category}', '${stock}')`
+    const query = `INSERT INTO products (name, price, description, image) VALUES ('${name}', '${price}', "${description}", '${images}')`
 
     db.query(query, (err, result) => {
         if(err){
@@ -50,9 +50,9 @@ app.post('/product', (req, res) => {
    }
 })
 
-app.get('/product', (req, res) => {
+app.get('/products', (req, res) => {
 
-    const query = `SELECT * FROM product`
+    const query = `SELECT * FROM products`
 
     db.query(query, (err, result) => {
         if(err){

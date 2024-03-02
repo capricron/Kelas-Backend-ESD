@@ -1,25 +1,25 @@
 
-const productService = require('../services/product.service')
+const userService = require('../services/user.service')
 const { imageValidations } = require('../validations/image.validation')
-const {validateAddProduct, validateEditProduct} = require('../validations/product.validation')
+const {validateAddUser, validateEditUser} = require('../validations/user.validation')
 
-exports.getAllProducts = async (req, res) => {
+exports.getAllUsers = async (req, res) => {
 
-    const result = await productService.getAllProducts(req, res)
+    const result = await userService.getAllUsers(req, res)
 
     return res.status(result.status).json(result)
 }
 
-exports.getDetailProduct = async (req, res) => {
+exports.getDetailUser = async (req, res) => {
     
-    const result = await productService.getDetailProduct(req, res)
+    const result = await userService.getDetailUser(req, res)
 
     return res.status(result.status).json(result)
 }
 
-exports.createProduct = async (req, res) => {
+exports.createUser = async (req, res) => {
 
-    let {error} = validateAddProduct(req.body)
+    let {error} = validateAddUser(req.body)
 
     if(error){
         return res.status(400).json({
@@ -36,16 +36,16 @@ exports.createProduct = async (req, res) => {
     
     }
 
-    const result = await productService.createProduct(req, res)
+    const result = await userService.createUser(req, res)
 
     return res.status(result.status).json(result)
 }
 
 
-// edit product
-exports.editProduct = async (req, res) => {
+// edit User
+exports.editUser = async (req, res) => {
 
-    let {error} = validateEditProduct(req.body)
+    let {error} = validateEditUser(req.body)
 
     if(error){
         return res.status(400).json({
@@ -61,14 +61,14 @@ exports.editProduct = async (req, res) => {
         })
     }
 
-    const result = await productService.editProduct(req, res)
+    const result = await userService.editUser(req, res)
 
     return res.status(result.status).json(result)
 }
 
-exports.deleteProduct = async (req, res) => {
+exports.deleteUser = async (req, res) => {
 
-    const result = await productService.deleteProduct(req, res)
+    const result = await userService.deleteUser(req, res)
 
     return res.status(result.status).json(result)
 }
