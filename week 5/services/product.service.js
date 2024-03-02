@@ -9,7 +9,10 @@ exports.getAllProducts = async (req, res) => {
     const data = await products.findAll()
 
     // convert data price to rupiah format
-    const dataConvertRupiah = rupiahFormat(data)
+    const dataConvertRupiah = data.map(item => {
+        item.price = rupiahFormat(item.price)
+        return item
+    })
 
     return {
         status: 200,
