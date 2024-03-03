@@ -1,0 +1,1 @@
+Mengatur request (data masuk) dan response (data keluar) dari route sehingga ketika ada request biasanya akan di validasi

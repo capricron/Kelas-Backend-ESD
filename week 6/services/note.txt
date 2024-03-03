@@ -1,0 +1,1 @@
+logic utama crud dari sebuah routes
