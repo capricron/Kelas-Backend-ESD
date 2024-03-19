@@ -14,9 +14,12 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   checkout.init({
+    order_id: DataTypes.STRING,
     id_user: DataTypes.STRING,
     id_product: DataTypes.STRING,
-    quantity: DataTypes.INTEGER
+    quantity: DataTypes.INTEGER,
+    status: DataTypes.STRING,
+    va_number: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'checkout',

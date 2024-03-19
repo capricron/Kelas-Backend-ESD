@@ -37,6 +37,7 @@ exports.authServiceLogin = async (req) => {
         id: dataUser.id,
         email: dataUser.email,
         name: dataUser.name,
+        number: dataUser.number
     }, process.env.JWT , {
         expiresIn: '24h'
     })

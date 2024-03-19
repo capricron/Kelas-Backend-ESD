@@ -8,6 +8,7 @@ var app = require('../app');
 var debug = require('debug')('myapp:server');
 var http = require('http');
 const winston = require('winston');
+const {initWa} = require('../wa');
 
 const logger = winston.createLogger({
   transports: [
@@ -18,6 +19,8 @@ const logger = winston.createLogger({
 /**
  * Get port from environment and store in Express.
  */
+
+initWa();
 
 var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);

@@ -8,5 +8,6 @@ router.post('/', auth, checkoutController.checkoutProducController)
 // router.put('/:id', userController.editUser)
 // router.delete('/:id', userController.deleteUser)
 // router.get('/:id', userController.getDetailUser)
+router.post('/notifikasi', checkoutController.checkoutNotifikasiController)
 
 module.exports = router;
